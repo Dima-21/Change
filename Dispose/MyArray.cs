@@ -28,7 +28,7 @@ namespace Dispose
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    Console.Write(array[i, j]+ " ");
+                    Console.Write(array[i, j]);
                 }
                 Console.WriteLine();
             }
@@ -50,59 +50,63 @@ namespace Dispose
             switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    currentpos.X++;
-                    cursor.Y++;
+                    currentpos.Row++;
                     break;
                 case ConsoleKey.UpArrow:
-                    currentpos.X--;
-                    cursor.Y--;
+                    currentpos.Row--;
                     break;
                 case ConsoleKey.LeftArrow:
-                    currentpos.Y--;
-                    cursor.X-=2;
+                    currentpos.Colomn--;
+
                     break;
                 case ConsoleKey.RightArrow:
-                    cursor.X += 2;
+                    currentpos.Colomn++;
                     break;
             }
-            if (currentpos.X > array.GetLength(0) - 1)
+            if (currentpos.Row > array.GetLength(0) - 1)
             {
-                currentpos.X--;
-                cursor.Y--;
+                currentpos.Row--;
             }
-            else if (currentpos.Y > array.GetLength(1) - 1)
+            else if (currentpos.Colomn > array.GetLength(1) - 1)
             {
-                currentpos.Y--;
-                cursor.X -= 2;
+                currentpos.Colomn--;
             }
-            else if (currentpos.X < 0)
+            else if (currentpos.Row < 0)
             {
-                currentpos.X++;
-                cursor.Y++;
+                currentpos.Row++;
             }
-            else if (currentpos.Y < 0)
+            else if (currentpos.Colomn < 0)
             {
-                currentpos.Y++;
-                cursor.X+=2;
+                currentpos.Colomn++;
             }
             else
                 Exchange();
-            oldpos = currentpos;
+            oldpos.Colomn = currentpos.Colomn;
+            oldpos.Row = currentpos.Row;
         }
 
         private void Exchange()
         {
-            if (array[oldpos.X, oldpos.Y] < array[currentpos.X, currentpos.Y])
-                array[oldpos.X, oldpos.Y]++;
-            else
-                array[oldpos.X, oldpos.Y]--;
-            int tmp = array[oldpos.X, oldpos.Y];
-            array[oldpos.X, oldpos.Y] = array[currentpos.X, currentpos.Y];
-            array[currentpos.X, currentpos.Y] = tmp;
+            if (array[oldpos.Row, oldpos.Colomn] < array[currentpos.Row, currentpos.Colomn])
+                array[oldpos.Row, oldpos.Colomn]++ ;
+            else if (array[oldpos.Row, oldpos.Colomn] > array[currentpos.Row, currentpos.Colomn])
+                array[oldpos.Row, oldpos.Colomn]--;
+            int tmp = array[oldpos.Row, oldpos.Colomn];
+            array[oldpos.Row, oldpos.Colomn] = array[currentpos.Row, currentpos.Colomn];
+            array[currentpos.Row, currentpos.Colomn] = tmp;
+
+            if (array[oldpos.Row, oldpos.Colomn] > 9)
+            {
+                array[oldpos.Row, oldpos.Colomn] = 9;
+            }
+            if (array[oldpos.Row, oldpos.Colomn]<0)
+            {
+                array[oldpos.Row, oldpos.Colomn] = 0;
+            }
         }
         public void SetCursor()
         {
-                Console.SetCursorPosition(cursor.X, cursor.Y);
+                Console.SetCursorPosition(currentpos.Colomn, currentpos.Row);
         }
 
     }

@@ -8,14 +8,14 @@ namespace Dispose
 {
     class Position
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int Row { get; set; }
+        public int Colomn { get; set; }
         public Position()
         { }
         public Position(int x, int y)
         {
-            X = x;
-            Y = y;
+            Row = x;
+            Colomn = y;
         }
     }
 }

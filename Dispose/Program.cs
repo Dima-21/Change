@@ -11,7 +11,7 @@ namespace Dispose
     { 
         static void Main(string[] args)
         {
-            MyArray array = new MyArray(5,6);
+            MyArray array = new MyArray(3,3);
             array.InitArray();
             ConsoleKey key;
             do {
